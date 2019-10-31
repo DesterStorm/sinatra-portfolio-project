@@ -1,0 +1,12 @@
+<h1></h1>
+<h1>Welcome to Your Applicant List</h1>
+<ol>
+  <% Array(@applicants).each do |applicant|%>
+    <li>
+      <a href="/applicants/<%= applicant.id%>">
+        <%=applicant.chore%>
+      </a>
+    </li>
+  <%end%>
+</ol>
+<br />
