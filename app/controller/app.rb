@@ -13,31 +13,6 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get '/companies' do
-    @companies = Company.all
-    erb :'company/index'
-  end
-
-  get '/companies/new' do
-    erb :'companies/new'
-  end
-
-  get '/companies/:id' do
-    @company = Company.find(params[:id])
-
-    erb :'companies/show'
-  end
-
-  post '/companies' do
-    binding.pry
-  end
-
-  get '/apply' do
-    erb :'applicant/index'
-  end
-
-
-
   helpers do
     def logged_in?
       !!session[:email] # is it not, not logged in? true or false
@@ -49,11 +24,11 @@ class ApplicationController < Sinatra::Base
 
     def logout!
       session.clear
-      redirect '/tests'
+      redirect '/login'
     end
 
     def current_user
-      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+      @current_user ||= Company.find_by(id: session[:company_id]) if session[:company_id]
     end
   end
 end
