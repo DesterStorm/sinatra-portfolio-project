@@ -13,8 +13,23 @@ class ApplicationController < Sinatra::Base
     erb :index
   end
 
-  get '/company' do
+  get '/companies' do
+    @companies = Company.all
     erb :'company/index'
+  end
+
+  get '/companies/new' do
+    erb :'companies/new'
+  end
+
+  get '/companies/:id' do
+    @company = Company.find(params[:id])
+
+    erb :'companies/show'
+  end
+
+  post '/companies' do
+    binding.pry
   end
 
   get '/apply' do

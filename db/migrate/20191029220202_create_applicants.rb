@@ -7,7 +7,7 @@ class CreateApplicants < ActiveRecord::Migration
       t.string :contact
       t.string :company_id
       # t.string :tests
-      # t.int :supervisor_id
+      # t.integer :supervisor_id
     end
   end
 end
