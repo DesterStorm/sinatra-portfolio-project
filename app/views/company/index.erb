@@ -1,9 +1,0 @@
-<h1>Company Profile Creation</h1>
-
-<ul>
-<% @companies.each.uniq do |company| %>
-    <li><em>Name: <%= company.name %></li></em>
-    <li>EIN: <%= company.ein %></li>
-    <li>Company ID: <%= company.company_id %></li>
-<% end %>
-</ul>

@@ -10,7 +10,7 @@ class CompanyController < ApplicationController
 
       @applicant = Apllicant.where(company_id: current_user)
       # binding.pry
-      erb :"applicant/index.html"
+      erb :"applicant/index"
     else
       redirect "/login"
     end
@@ -33,7 +33,7 @@ class CompanyController < ApplicationController
     if logged_in?
       redirect '/applicants'
     else
-      erb :"/companies/login.html"
+      erb :"/companies/login"
     end
   end
 
@@ -42,7 +42,7 @@ class CompanyController < ApplicationController
     if logged_in?
       redirect '/applicants'
     else
-      erb :'companies/new.html'
+      erb :'companies/new'
     end
   end
 
@@ -89,7 +89,7 @@ class CompanyController < ApplicationController
   get "/users/:id/edit" do
     @company = Company.find_by(id: session[:company_id])
     if @company
-      erb :"/companies/edit.html"
+      erb :"/companies/edit"
     else
       redirect "/login"
     end
