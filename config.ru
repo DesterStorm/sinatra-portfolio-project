@@ -6,5 +6,5 @@ end
 
 use Rack::MethodOverride
 run ApplicationController
-# use TestsController
-# use UsersController
+use ApplicationController
+use CompaniesController

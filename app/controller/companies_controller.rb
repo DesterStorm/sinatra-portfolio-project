@@ -1,39 +1,4 @@
-require './config/environment'
-
-class ApplicationController < Sinatra::Base
-
-  configure do
-    set :public_folder, 'public'
-    set :views, 'app/views'
-    enable :sessions
-    set :session_secret, "Tester_secret"
-  end
-
-  get '/' do
-    erb :index
-  end
-
-  helpers do
-    def logged_in?
-      !!session[:email] # is it not, not logged in? true or false
-    end
-
-    def login(email)
-      session[:email] = params[:email]
-    end
-
-    def logout!
-      session.clear
-      redirect '/login'
-    end
-
-    def current_user
-      @current_user ||= Company.find_by(id: session[:company_id]) if session[:company_id]
-    end
-  end
-
-
-
+class CompaniesController < ApplicationController
 
   # GET: /let the company go to the company profile creation page
   get '/companies/new' do
@@ -62,7 +27,7 @@ class ApplicationController < Sinatra::Base
   end
 
   # GET: /let the company go to the login page
-  get '/login' do
+  get '/companies/login' do
     if logged_in?
       redirect '/applicants'
     else
@@ -71,7 +36,7 @@ class ApplicationController < Sinatra::Base
   end
 
   # POST /send the login info to the server and let the company login
-  post '/login' do
+  post '/companies/login' do
     @company = Company.find_by(:name => params[:company_name])
     if @company && @company.authenticate(params[:password])
       session[:company_id] = @company.id
@@ -82,7 +47,7 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/companies' do
-    if signed_in?
+    if logged_in?
       # then find the user who's session params = to company_id
       @company = Company.find(session[:company_id])
       # finally display the applicant list where company_id == to current_user
@@ -90,7 +55,7 @@ class ApplicationController < Sinatra::Base
       # binding.pry
       erb :'applicant/index'
     else
-      redirect '/login'
+      redirect '/companies/login'
     end
   end
 
@@ -100,26 +65,19 @@ class ApplicationController < Sinatra::Base
       # binding.pry
       erb :'company/show'
     else
-      redirect '/login'
+      redirect '/companies/login'
     end
   end
 
 
-
-
-
-
-
-
-
-  get '/logout' do
-    #if the company is logged in then clear the session and redirect to the /login page
+  get '/companies/logout' do
+    #if the company is logged in then clear the session and redirect to the /companies/login page
     #else redirect to the /index page
     if logged_in?
       session.destroy
-      redirect '/login'
+      redirect '/companies/login'
     else
-      redirect '/index'
+      redirect '/companies/login'
     end
   end
 
@@ -127,9 +85,9 @@ class ApplicationController < Sinatra::Base
   get '/companies/:id/edit' do
     @company = Company.find_by(id: session[:company_id])
     if @company
-      erb :'/company/edit'
+      erb :'company/edit'
     else
-      redirect '/login'
+      redirect '/companies/login'
     end
   end
 
@@ -151,15 +109,7 @@ class ApplicationController < Sinatra::Base
         end
       end
     else
-      redirect '/login'
+      redirect '/companies/login'
     end
   end
-
-
-
-
-
-
-
-
 end
