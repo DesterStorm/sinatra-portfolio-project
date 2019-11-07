@@ -22,9 +22,10 @@ ActiveRecord::Schema.define(version: 20191029220202) do
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string "name"
-    t.string "ein"
-    t.string "company_id"
+    t.string  "name"
+    t.string  "ein"
+    t.string  "company_id"
+    t.integer "password_digest"
   end
 
 end

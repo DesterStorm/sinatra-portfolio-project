@@ -1,105 +1,108 @@
 class CompaniesController < ApplicationController
 
-  # GET: /let the company go to the company profile creation page
-  get '/companies/new' do
-    if logged_in?
-      redirect '/applicants'
-    else
-      erb :'company/new.html'
-    end
-  end
-
-  #POST:/send the /companies/new info to the server + let the company create an account
-  post '/companies/new' do
-    # if even one field is empty direct to the companies/new page
-    if params[:company_name].empty? || params[:email].empty? || params[:password].empty?
-      redirect '/companies/new'
-    else
-      #else create a new instance of company using params
-      # set session[:company_id] to newly created company id
-      #finally redirect the user to the applicant list page
-      # binding.pry
-      @company = Company.create(:company_name => params[:company_name], :email => params[:email], :password => params[:password])
-      # @company.save
-      session[:company_id] = @company.id
-      redirect '/applicants'
-    end
-  end
-
-  # GET: /let the company go to the login page
-  get '/companies/login' do
-    if logged_in?
-      redirect '/applicants'
-    else
-      erb :'company/login.html'
-    end
-  end
-
-  # POST /send the login info to the server and let the company login
-  post '/companies/login' do
-    @company = Company.find_by(:name => params[:company_name])
-    if @company && @company.authenticate(params[:password])
-      session[:company_id] = @company.id
-      redirect '/applicants'
-    else
-      redirect '/companies/new'
-    end
-  end
-
   get '/companies' do
-    if logged_in?
+    if signed_in?
       # then find the user who's session params = to company_id
       @company = Company.find(session[:company_id])
-      # finally display the applicant list where company_id == to current_user
-      @applicant = Apllicant.where(company_id: current_user)
+      # finally display the applicant list where company_id == to current_company
+
+      # @applicant = Apllicant.where(company_id: current_company)
       # binding.pry
-      erb :'applicant/index'
+      erb :'companies/show.html'
     else
-      redirect '/companies/login'
+      redirect '/signin'
     end
   end
 
   get '/companies/:id' do
-    if logged_in?
+    if signed_in?
       @company = Company.find(params[:id])
       # binding.pry
-      erb :'company/show'
+      erb :'/companies/show.html'
     else
-      redirect '/companies/login'
+      redirect '/signin'
     end
   end
 
+  # GET: /let the company go to the signin page
+  get '/signin' do
+    if signed_in?
+      redirect '/applicants'
+    else
+      erb :'/companies/signin.html'
+    end
+  end
 
-  get '/companies/logout' do
-    #if the company is logged in then clear the session and redirect to the /companies/login page
+  # GET: /let the company go for the sign-up page --done
+  get "/signup" do
+    if signed_in?
+      redirect '/applicants'
+    else
+      erb :"/companies/new.html"
+    end
+  end
+
+  # POST: /send the sign-in info to the server and let the company to login
+  post "/signin" do
+    @company = Company.find_by(:name => params[:name])
+    if @company && @company.authenticate(params[:password])
+      session[:company_id] = @company.id
+      redirect '/applicants'
+    else
+      redirect "/signup"
+    end
+  end
+
+  #POST:/send the signup form to the server and let the company create an account
+  post "/signup" do
+    # if one of the entry field is empty direct to the signup page
+    if params[:name].empty? || params[:email].empty? || params[:password].empty?
+      redirect "/signup"
+    else
+      #else create a new instance of company using params
+      # set session[:company_id] to newly created company id
+      #finally redirect the company to the applicants list page
+      # binding.pry
+      @company = Company.create(:name => params[:name], :email => params[:email], :password => params[:password])
+      # @company.save
+      session[:company_id] = @company.id
+      redirect "/applicants"
+    end
+  end
+
+  get "/signout" do
+    #if the company is logged in then clear the session and redirect to the /signin page
     #else redirect to the /index page
-    if logged_in?
+    if signed_in?
       session.destroy
-      redirect '/companies/login'
+      redirect "/signin"
     else
-      redirect '/companies/login'
+      redirect "/index"
     end
   end
 
-  # GET: /companies/# show a user with specific id
-  get '/companies/:id/edit' do
+  # GET: /companies/5 show a company with specific id
+  get "/companies/:id/edit" do
     @company = Company.find_by(id: session[:company_id])
     if @company
-      erb :'company/edit'
+
+      # there is no relation between this line and line 37 it just bcz of redirecting due to design
+      # those two values end up equal
+      erb :"/companies/edit.html"
     else
-      redirect '/companies/login'
+      redirect "/signin"
     end
   end
 
   patch '/companies/:id' do
     # binding.pry
-    if logged_in?
-      if params[:company_name].empty?
+    if signed_in?
+      if params[:name].empty?
         redirect "/companies/#{params[:id]}/edit"
       else
         @company = Company.find_by_id(params[:id])
-        if @company == current_user
-          if @company.update(:company_name => params[:company_name], :email => params[:email])
+        if @company == current_company
+          if @company.update(:name => params[:name], :email => params[:email])
             redirect to "/companies/#{@company.id}"
           else
             redirect to "/companies/#{@company.id}/edit"
@@ -109,7 +112,7 @@ class CompaniesController < ApplicationController
         end
       end
     else
-      redirect '/companies/login'
+      redirect '/signin'
     end
   end
 end

@@ -1,0 +1,46 @@
+# My steps list for building my Sinatra application using MVC
+
+[X] structure the application files.
+[X] Migrate the db for companies & positions.
+[X] test the main controller with welcome page index.erb
+[X] set the ApplicationController(AC) associations
+  [x] belongs_to for the positions
+  [x] has_many for the company
+  [x] has_secure_password for the company
+# ApplicationController
+  [x] enable sessions
+  [x] set session_secret to a super_secret_squirrel string
+  # set helper methods
+    [x] login
+    [x] logout
+    [x] current company
+#CompaniesController
+  [x] set the route to work on the server
+  [x] build the CRUD at companies
+    [x] build login get method
+    [x] build login form
+    [x] build logout action
+    [x] build companies/new get method
+    [x] build companies/new form
+    [x] login submit action (post)
+    [x] companies/new submit action (post)
+    [x] company can edit name & email
+    [x] show all applicants button in the nav bar
+    [x] I can login and logout with different companies
+  [x] use Rack::MethodOverride in config.ru
+[x] build the CRUD at positions
+  [x] Welcome the company
+  [x] add new applicant and save it
+  [x] show all positions via iterating over the collection
+  [x] can edit the Applicant
+  [x] show applicant after editing
+  [x] can delete the applicant
+[x] company can see their only related applicants
+[x] redirect to an companies/new page to if the input is invalid data
+[x] application is working according to the requirements
+[x] write down the README
+[x] apply basic css
+[x] write a blog post
+[x] record the walkthrough
+[x] final commit "it is finished"
+[] submit and schedule assessment

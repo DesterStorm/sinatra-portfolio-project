@@ -16,4 +16,7 @@ configure :production do
   ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'] || 'postgres://localhost/mydb')
 end
 
+# require 'app/controller/application_controller.rb'
 require_all 'app'
+
+# require 'app/controller/applicants_controller.rb'
