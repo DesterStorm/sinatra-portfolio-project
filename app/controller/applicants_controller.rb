@@ -1,29 +1,27 @@
 class ApplicantsController < ApplicationController
-# GET: /applicants asking the server for the data in applicants -- done
-#   binding.pry
+# GET: /applicants asking the server for the data in applicant -- done
   get "/applicants" do
-    # binding.pry
-    # if the company is logged in?
-    if logged_in?
+    # if the company is signed in?
+    if signed_in?
       # then find the company who's session params = to company_id
       @company = Company.find(session[:company_id])
-      # finally disply the applicant list where company_id = to current company
+      # finally display the applicant list where company_id = to current company
 
       @applicants = Applicant.where(company_id: current_company)
       # binding.pry
-      erb :"applicant/index"
+      erb :"applicants/index.html"
     else
-      redirect "/companies/login"
+      redirect "/signin"
     end
   end
   # binding.pry
   # GET: /applicants/new -- done
   get "/applicants/new" do
-    if logged_in?
+    if signed_in?
       @company = Company.find_by(id: session[:company_id])
-      erb :"applicants/new.html"
+      erb :"/applicants/new.html"
     else
-      redirect "/companies/login"
+      redirect "/signin"
     end
   end
   # binding.pry
