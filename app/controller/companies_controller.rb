@@ -85,9 +85,6 @@ class CompaniesController < ApplicationController
   get "/companies/:id/edit" do
     @company = Company.find_by(id: session[:company_id])
     if @company
-
-      # there is no relation between this line and line 37 it just bcz of redirecting due to design
-      # those two values end up equal
       erb :"/companies/edit.html"
     else
       redirect "/signin"
