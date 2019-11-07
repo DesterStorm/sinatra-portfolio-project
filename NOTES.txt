@@ -11,22 +11,22 @@
   [x] enable sessions
   [x] set session_secret to a super_secret_squirrel string
   # set helper methods
-    [x] login
-    [x] logout
+    [x] signin
+    [x] signout
     [x] current company
 #CompaniesController
   [x] set the route to work on the server
   [x] build the CRUD at companies
-    [x] build login get method
-    [x] build login form
-    [x] build logout action
+    [x] build signin get method
+    [x] build signin form
+    [x] build signout action
     [x] build companies/new get method
     [x] build companies/new form
-    [x] login submit action (post)
+    [x] signin submit action (post)
     [x] companies/new submit action (post)
     [x] company can edit name & email
     [x] show all applicants button in the nav bar
-    [x] I can login and logout with different companies
+    [x] I can signin and signout with different companies
   [x] use Rack::MethodOverride in config.ru
 [x] build the CRUD at positions
   [x] Welcome the company
