@@ -6,16 +6,16 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "super_secret_squirrel"
+    set :session_secret, "applicant_secret"
   end
 
-  get '/' do
+  get "/" do
     erb :index
   end
 
   helpers do
     def signed_in?
-      !!current_company # is it not, not logged in? true or false
+      !!current_company
     end
 
     def current_company

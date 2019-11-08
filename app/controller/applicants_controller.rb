@@ -1,11 +1,11 @@
 class ApplicantsController < ApplicationController
-# GET: /applicants asking the server for the data in applicant -- done
+# GET: /applicants asking the server for the data in applicants -- done
   get "/applicants" do
-    # if the company is signed in?
+    # if the companies is signed in?
     if signed_in?
-      # then find the company who's session params = to company_id
+      # then find the companies who's session params = to company_id
       @company = Company.find(session[:company_id])
-      # finally display the applicant list where company_id = to current company
+      # finally display the applicants list where company_id = to current companies
 
       @applicants = Applicant.where(company_id: current_company)
       # binding.pry
@@ -35,7 +35,7 @@ class ApplicantsController < ApplicationController
         redirect "/applicants/new"
       else
         @company = Company.find_by(:id => session[:company_id])
-        # create new instance of applicant
+        # create new instance of applicants
         @applicant = Applicant.new
         # set the name of position
         @applicant.position = params[:position]
@@ -43,10 +43,10 @@ class ApplicantsController < ApplicationController
         @applicant.company_id = @company.id
         @applicant.save
 
-        # applicant = Applicant.create(position: params[:position], company_id: @company.id)
+        # applicants = Applicant.create(position: params[:position], company_id: @companies.id)
         # redirect to the show page, HTTP is stateless means instance variable in one action
         # will ever never relates to instance variable in another action
-        # ser the applicant id to the propeer one
+        # ser the applicants id to the propeer one
         redirect "/applicants"
       end
     else
@@ -57,7 +57,7 @@ class ApplicantsController < ApplicationController
   # binding.pry
   get '/applicants/:id' do
     if logged_in?
-      # @company = Company.find_by(id: session[:company_id])
+      # @companies = Company.find_by(id: session[:company_id])
       @applicant = Applicant.find(params[:id])
       if @applicant && @applicant.company == current_company
         # binding.pry

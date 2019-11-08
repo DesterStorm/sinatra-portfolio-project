@@ -5,8 +5,8 @@ gem 'activerecord', '~> 4.2', '>= 4.2.6', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
 gem 'rake'
 gem 'sinatra-flash'
-gem 'require_all', '1.5.0'
-# gem 'thin'
+gem 'require_all'
+gem 'thin'
 gem 'shotgun'
 gem 'pony'
 gem 'bcrypt'
@@ -16,9 +16,9 @@ group :production do
   gem 'pg', '0.15'
 end
 
-group :development do 
-	gem 'sqlite3'
-	gem 'pry'
+group :development do
+  gem 'sqlite3'
+  gem 'pry'
 end
 
 
