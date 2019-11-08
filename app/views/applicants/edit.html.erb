@@ -1,0 +1,8 @@
+<h1>Editing your Applicant</h1>
+<h3>Edit for: <h2 class="confirm"><%= @applicant.position %></h2></h3>
+
+<form action="/applicants/<%= @applicant.id %>" method="post">
+  <input id="hidden" type="hidden" name="_method" value="patch">
+  <textarea type="text" name="position" placeholder="Updated applicant text"></textarea>
+  <input type="submit" value="update">
+</form>
