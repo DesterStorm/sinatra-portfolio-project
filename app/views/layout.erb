@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+
+  <title>SinatraApplicantTester</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="../../stylesheets/main.css" />
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <h1>Applicant Tester</h1>
+    <iframe position="centered" width="779" height="439" src="http://lifetbi.org/wp-content/uploads/2019/01/Header-Video.mp4" frameborder="0" allow="accelerometer; autoplay; loop"></iframe>
+
+    <nav>
+          <% if signed_in? %>
+
+            <button><a href="/applicants/new"> Create New applicant </a></button>
+            <button><a href="/signout"> Sign-Out </a></button>
+            <button><a href="/companies/<%=current_company.id %>"> Edit-Profile </a></button>
+            <button><a href="/applicants"> Show-My-Applicants </a></button>
+            <p>Welcome, <strong><%=current_company.name.upcase %></strong></p>
+
+          <% else %>
+            <button><a href="/signup">Sign-Up</a></button>
+            <button><a href="/signin"> Sign-In </a></button>
+          <%end %>
+
+        </nav>
+      <%= yield %>
+
+    <footer class="branding">
+      <small>&copy; 2019 <strong>SinatraApplicantApp</strong></small>
+    </footer>
+  </div>
+</body>

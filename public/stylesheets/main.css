@@ -1,40 +1,52 @@
 @media screen {
-  /* --- Reset Styles --- */
   button {
-    /* list-style: none; */
-    margin: 10px;
-    padding: 10px;
-  }
- /* textarea {
-   position: absolute;
- } */
-  html, body {
-    height: 100%;
-    width: 100%;
+    background-color: palegoldenrod;
+    margin: 8px;
+    padding: 8px;
   }
 
-  /* --- Welcome Page Styles --- */
+  html, body {
+    background-image: url(../images/test_taker.jpg);
+    background-size: 100%;
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+
+   --- Welcome Page Styles ---
   body {
-    background-color: green;
+    background-color: rebeccapurple;
     color: #333;
     font-family: Sans-Serif;
     line-height: 18px;
   }
+
   .wrapper {
-    background: #fff;
+    background-color: ivory;
     -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
     -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
     box-shadow: 0 0 10px rgba(0,0,0,.3);
-    margin: 16px auto;
+    margin: 0 auto;
     max-width: 960px;
     padding: 2.25%; /* 18px / 800px */
+    padding-top: 0.008%;
     width: 85%;
+    text-align: center;
   }
+
 
   h1 {
     font-size: 36px;
     line-height: 54px;
   }
+
+
 
   h2 {
     border-bottom: 2px solid #ccc;
@@ -50,6 +62,13 @@
 
   p {
     margin-bottom: 18px;
+  }
+
+  .video_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 
   .main {
