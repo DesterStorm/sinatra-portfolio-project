@@ -1,18 +1,21 @@
-<h1>Create your Company profile here</h1>
-<form action="/companies/new" method="POST">
-
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="company[name]">
-  <br>
-
-  <label for="name">Email:</label>
-  <input type="text" id="email" name="company[email]">
-  <br>
-
-  <label for="password">Password:</label>
-  <input type="text" id="password" name="company[password]">
-
-  <br>
-  <input type="submit">
-
+<h1>Sign-Up to Applicant Tester app</h1>
+<h1></h1>
+<br />
+<form action="/signup" method="POST">
+  <p>
+    <label for="name">Name: </label>
+    <input type="text" name="name" placeholder="Name:">
+  </p>
+  <br />
+  <p>
+    <label for="email">Email: </label>
+    <input type="text" name="email" placeholder="Email:">
+  </p>
+  <br />
+  <p>
+    <label for="password">Password:  </label>
+    <input type="text" name="password" placeholder="Password:">
+  </p>
+  <br />
+  <input type="submit" value="Sign-Up">
 </form>
