@@ -1,2 +1,9 @@
-<h1>Display your company here</h1>
-<%= @company.name %>
+<h3>Welcome to your Companies profile page</h3>
+
+<h3><%=current_company.name%></h3>
+
+<h3><%=current_company.email%></h3>
+
+<p>
+  <a href="/companies/<%=@company.id%>/edit">Edit profile </a>
+</p>
