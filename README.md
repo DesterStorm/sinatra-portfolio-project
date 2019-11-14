@@ -21,4 +21,5 @@ Running the app
 
 *Note You have to enter a proper email to be allowed to signup to the application
 *When signing into an existing account, if the wrong password is used, there will be a notice on the page saying so.
-*
+
+The License for my app can be found at https://github.com/DesterStorm/sinatra-portfolio-project/blob/master/LICENSE.md
